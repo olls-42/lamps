@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432"
+###< doctrine/doctrine-bundle ###
+
+###> symfony/mailer ###
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1024"
+      - "8024"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+###< symfony/mailer ###
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: 'mailhog'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
